@@ -64,23 +64,27 @@ async def on_message(message):
 async def greet(*args):
     await client.say('''Welcome to Egg-Server young hatchling!
                      ------------------------------------------
-                     I have a number of useless commands, and at least one easter egg...
+                     My creator Claytonious gave me a number of 
+                     useless commands, and at least one easter egg...
                      -----------------------------------------------------------------
                      Use the prefix "egg-" to use the following commands
-                     ---------
-                     Commands: 
-                     1) test - Tests the eggcasting service.
-                     2) users - Gives user information about Egg-Server inhabitants.
-                     3) fortune - Provides the user with a glimpse into their future.
-                     4) boost - Ask Egg bot for a confidence boost!
-                     ----------
+                     -----------------------------------------------------------------
+                     Commands:
+                     1) greet - Pulls up this screen!    
+                     2) test - Tests the eggcasting service.
+                     3) users - Gives user information about Egg-Server inhabitants.
+                     4) fortune - Provides the user with a glimpse into their future.
+                     5) boost - Ask Egg Bot for a confidence boost!
+                     ----------------------------------------------------------------------
+                     Feel free to look at my source code: https://github.com/cbesaw/egg-bot
+                     ----------------------------------------------------------------------
                      More to come...maybe...
                      ''')
     
 #egg boy emoji
 @client.command()
 async def boost(*args):
-    await client.say('You are more :egg:-cellent!')
+    await client.say('You are most :egg:-cellent!')
     
        
 #gives fortunes based on egg puns 50% of the time
