@@ -106,5 +106,5 @@ async def fortune(*args):
 
     
     	
-client.run('NDE3NDAxNDI1OTIwNzg2NDMz.DXSe4w.Cjy0mMdkwGLD3VslphhSx0bhgyM')
+client.run('YOUR CLIENT CODE HERE')
 
