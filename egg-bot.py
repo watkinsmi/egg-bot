@@ -5,6 +5,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
 import random
+from egg_assets import greet_txt, tulku_memes, bw_text, fortune_list
 
 # Here you can modify the bot's prefix and description and wether it sends help in direct messages or not.
 client = Bot(description="Egg Bot", command_prefix="egg-", pm_help = False)
@@ -53,58 +54,66 @@ async def on_message(message):
     if str(message.content) == 'I am an eggboy!':
         await client.send_message(message.channel, 'https://youtu.be/yavYMMpzBrA?t=1m21s')
         await client.send_message(message.channel, 'most......EGGSCELLENT!')
+    elif str(message.content).lower() == 'goodbye egg bot':
+        await client.send_message(message.channel, 'Good night sweet prince...')
+    elif str(message.content).lower() == 'hello':
+        await client.send_message(message.channel, '''Hello egg boy!
+                                                      Welcome to egg channel!
+                                                      Home of the egg boys!
+                                                      May I be your overlord?''')
+    elif str(message.content).lower() == 'yes':
+        await client.send_message(message.channel, 'Take down ye trowsers boy!')
     elif str(message.author.name) != 'Egg Bot':
         n1, n2 = create_random_comparison()
-        if n1 == n2:
+        if n1 > n2:
             await client.send_message(message.channel, 'Eggcellent communication my dude!')
+        elif n1 == n2:
+            await client.send_message(message.channel, 'https://media1.tenor.com/images/a0eb3bd86d78684a8e92858f428af621/tenor.gif?itemid=5913912')
     await client.process_commands(message)
     
 #greet and give advice
 @client.command()
 async def greet(*args):
-    await client.say('''Welcome to Egg-Server young hatchling!
-                     ------------------------------------------
-                     My creator Claytonious gave me a number of 
-                     useless commands, and at least one easter egg...
-                     -----------------------------------------------------------------
-                     Use the prefix "egg-" to use the following commands
-                     -----------------------------------------------------------------
-                     Commands:
-                     1) greet - Pulls up this screen!    
-                     2) test - Tests the eggcasting service.
-                     3) users - Gives user information about Egg-Server inhabitants.
-                     4) fortune - Provides the user with a glimpse into their future.
-                     5) boost - Ask Egg Bot for a confidence boost!
-                     ----------------------------------------------------------------------
-                     Feel free to look at my source code: https://github.com/cbesaw/egg-bot
-                     ----------------------------------------------------------------------
-                     More to come...maybe...
-                     ''')
+    await client.say(greet_txt)
     
 #egg boy emoji
 @client.command()
 async def boost(*args):
     await client.say('You are most :egg:-cellent!')
+ 
+#tulku'd
+@client.command()
+async def tulku(*args):
+    tulku_list = tulku_memes
+    await client.say('Blaze it my egg!')
+    await client.say(str(random.sample(tulku_list, 1))[2:-2])
+    
+#second easter egg, the long easter egg
+@client.command()
+async def long_egg(*args):
+    await client.say('Praise it!')
+    await client.say('http://i0.kym-cdn.com/entries/icons/original/000/023/206/Screen_Shot_2017-06-13_at_3.54.19_PM.png')
+
+#third easter egg, come to the sabbat    
+@client.command()
+async def sabbat(*aargs):
+    await client.say(bw_text)
+    await client.say('https://www.youtube.com/watch?v=TkC08sicP6Q')
+
     
        
-#gives fortunes based on egg puns 50% of the time
+#gives fortunes based on egg puns 40% of the time
 @client.command()
 async def fortune(*args):
     r = random.random()
-    fortune_list = ['Your future is most eggcellent!', 'You are eggsactly where you are supposed to be!',
-                    'Eggciting things in your future!', 'For a long life, eat eggs and get some eggercise.',
-                    'Eggstreme success in your future', 'Eggsplosive news coming your way', 'Eggstatic news coming!',
-                    'You are walking on egg-shells my friend.', 'Eggstreme hardships coming friend.', 'Your future is simply eggstravagent.',
-                    'Eggceptionally good luck coming your way.', 'Eggceptionally bad luck coming your way.', 'A rotten egg comes your way...',
-                    'Your weekend will be scrambled.', 'Your future looks hard boiled friend.', 'Don\'t egg-nore the good news coming to you soon.',
-                    'Simply....EGGCELLENT!', 'You will need to break a few eggs soon.']
+    fortunes = fortune_list
     if r < 0.40:
         await client.say("Unable to crack the shell of the void :(")
     else:
-        await client.say(str(random.sample(fortune_list, 1))[2:-2])
+        await client.say(str(random.sample(fortunes, 1))[2:-2])
         
 
     
     	
-client.run('YOUR CLIENT CODE HERE')
+client.run('NDE3NDAxNDI1OTIwNzg2NDMz.DXSe4w.Cjy0mMdkwGLD3VslphhSx0bhgyM')
 
