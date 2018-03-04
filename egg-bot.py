@@ -64,11 +64,15 @@ async def on_message(message):
     elif str(message.content).lower() == 'yes':
         await client.send_message(message.channel, 'Take down ye trowsers boy!')
     elif str(message.author.name) != 'Egg Bot':
-        n1, n2 = create_random_comparison()
-        if n1 > n2:
-            await client.send_message(message.channel, 'Eggcellent communication my dude!')
-        elif n1 == n2:
-            await client.send_message(message.channel, 'https://media1.tenor.com/images/a0eb3bd86d78684a8e92858f428af621/tenor.gif?itemid=5913912')
+        # I Think This *should* Return Any Question Asked In The Channel In Jeggden Smith Case
+        if str(message.content).endsWith('?'):
+            await client.send_message(message.channel, ' '.join([s[0].upper() + s[1:] for s in str(message.content).split(' ')]))
+        else:
+            n1, n2 = create_random_comparison()
+            if n1 > n2:
+                await client.send_message(message.channel, 'Eggcellent communication my dude!')
+            elif n1 == n2:
+                await client.send_message(message.channel, 'https://media1.tenor.com/images/a0eb3bd86d78684a8e92858f428af621/tenor.gif?itemid=5913912')
     await client.process_commands(message)
     
 #greet and give advice
@@ -111,9 +115,5 @@ async def fortune(*args):
         await client.say("Unable to crack the shell of the void :(")
     else:
         await client.say(str(random.sample(fortunes, 1))[2:-2])
-        
-
-    
     	
 client.run('NDE3NDAxNDI1OTIwNzg2NDMz.DXSe4w.Cjy0mMdkwGLD3VslphhSx0bhgyM')
-
