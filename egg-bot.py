@@ -6,6 +6,7 @@ from discord.ext import commands
 import platform
 import random
 from egg_assets import greet_txt, tulku_memes, bw_text, fortune_list
+import re
 
 # Here you can modify the bot's prefix and description and wether it sends help in direct messages or not.
 client = Bot(description="Egg Bot", command_prefix="egg-", pm_help = False)
@@ -100,12 +101,10 @@ async def long_egg(*args):
 
 #third easter egg, come to the sabbat    
 @client.command()
-async def sabbat(*aargs):
+async def sabbat(*args):
     await client.say(bw_text)
     await client.say('https://www.youtube.com/watch?v=TkC08sicP6Q')
 
-    
-       
 #gives fortunes based on egg puns 40% of the time
 @client.command()
 async def fortune(*args):
@@ -115,5 +114,37 @@ async def fortune(*args):
         await client.say("Unable to crack the shell of the void :(")
     else:
         await client.say(str(random.sample(fortunes, 1))[2:-2])
-    	
+
+#a third easter egg, shows a sugg-egg-stive photo
+@client.command()
+async def male_seggshual_organ(*args):
+    await client.say('https://i.imgur.com/Cb6sgyi.jpg')
+
+#fori printer (beginnings of eggscript)
+@client.command()
+async def fori(*args):
+    pattern = re.compile('in \d* to \d*: print "[a-zA-Z0-9]*";')
+    if (pattern.match(args)):
+        start = args.find('in ') + 3
+        end = args.find(' to')
+
+        x = args[start:end]
+        print(x)
+
+        start = args.find('to ') + 3
+        end = args.find(':')
+
+        y = args[start:end]
+
+        start = args.find('t "') + 3
+        end = args.find('";')
+
+        msg = args[start:end]
+
+        for i in range(int(x), int(y)):
+            client.say(msg)
+
+
+
+
 client.run('NDE3NDAxNDI1OTIwNzg2NDMz.DXSe4w.Cjy0mMdkwGLD3VslphhSx0bhgyM')
