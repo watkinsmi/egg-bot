@@ -100,12 +100,10 @@ async def long_egg(*args):
 
 #third easter egg, come to the sabbat    
 @client.command()
-async def sabbat(*aargs):
+async def sabbat(*args):
     await client.say(bw_text)
     await client.say('https://www.youtube.com/watch?v=TkC08sicP6Q')
 
-    
-       
 #gives fortunes based on egg puns 40% of the time
 @client.command()
 async def fortune(*args):
@@ -115,5 +113,10 @@ async def fortune(*args):
         await client.say("Unable to crack the shell of the void :(")
     else:
         await client.say(str(random.sample(fortunes, 1))[2:-2])
+
+#a third easter egg, shows a sugg-egg-stive photo
+@client.command()
+async def male_seggshual_organ(*args):
+    await client.say('https://i.imgur.com/Cb6sgyi.jpg')
     	
 client.run('NDE3NDAxNDI1OTIwNzg2NDMz.DXSe4w.Cjy0mMdkwGLD3VslphhSx0bhgyM')
