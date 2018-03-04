@@ -64,6 +64,28 @@ async def on_message(message):
                                                       May I be your overlord?''')
     elif str(message.content).lower() == 'yes':
         await client.send_message(message.channel, 'Take down ye trowsers boy!')
+    # fori? (beginnings of eggscript)
+    elif (re.compile('for i in \d* to \d*: print "[a-zA-Z0-9]*";').match(str(message.content))):
+        line = str(message.content)
+
+        start = line.find('in ') + 3
+        end = line.find(' to')
+
+        x = line[start:end]
+        print(x)
+
+        start = line.find('to ') + 3
+        end = line.find(':')
+
+        y = line[start:end]
+
+        start = line.find('t "') + 3
+        end = line.find('";')
+
+        msg = line[start:end]
+
+        for i in range(int(x), int(y)):
+            client.say(msg)
     elif str(message.author.name) != 'Egg Bot':
         # I Think This *should* Return Any Question Asked In The Channel In Jeggden Smith Case
         if str(message.content).endsWith('?'):
@@ -120,29 +142,6 @@ async def fortune(*args):
 async def male_seggshual_organ(*args):
     await client.say('https://i.imgur.com/Cb6sgyi.jpg')
 
-#fori printer (beginnings of eggscript)
-@client.command()
-async def fori(*args):
-    pattern = re.compile('in \d* to \d*: print "[a-zA-Z0-9]*";')
-    if (pattern.match(args)):
-        start = args.find('in ') + 3
-        end = args.find(' to')
-
-        x = args[start:end]
-        print(x)
-
-        start = args.find('to ') + 3
-        end = args.find(':')
-
-        y = args[start:end]
-
-        start = args.find('t "') + 3
-        end = args.find('";')
-
-        msg = args[start:end]
-
-        for i in range(int(x), int(y)):
-            client.say(msg)
 
 
 
