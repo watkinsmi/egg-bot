@@ -6,6 +6,7 @@ from discord.ext import commands
 import platform
 import random
 from egg_assets import greet_txt, tulku_memes, bw_text, fortune_list
+import re
 
 # Here you can modify the bot's prefix and description and wether it sends help in direct messages or not.
 client = Bot(description="Egg Bot", command_prefix="egg-", pm_help = False)
@@ -118,5 +119,32 @@ async def fortune(*args):
 @client.command()
 async def male_seggshual_organ(*args):
     await client.say('https://i.imgur.com/Cb6sgyi.jpg')
-    	
+
+#fori printer (beginnings of eggscript)
+@client.command()
+async def fori(*args):
+    pattern = re.compile('in \d* to \d*: print "[a-zA-Z0-9]*";')
+    if (pattern.match(args)):
+        start = args.find('in ') + 3
+        end = args.find(' to')
+
+        x = args[start:end]
+        print(x)
+
+        start = args.find('to ') + 3
+        end = args.find(':')
+
+        y = args[start:end]
+
+        start = args.find('t "') + 3
+        end = args.find('";')
+
+        msg = args[start:end]
+
+        for i in range(int(x), int(y)):
+            client.say(msg)
+
+
+
+
 client.run('NDE3NDAxNDI1OTIwNzg2NDMz.DXSe4w.Cjy0mMdkwGLD3VslphhSx0bhgyM')
