@@ -65,7 +65,7 @@ async def on_message(message):
         await client.send_message(message.channel, 'Take down ye trowsers boy!')
     elif str(message.author.name) != 'Egg Bot':
         # I Think This *should* Return Any Question Asked In The Channel In Jeggden Smith Case
-        if str(message.content).endsWith('?'):
+        if str(message.content).endswith('?'):
             await client.send_message(message.channel, ' '.join([s[0].upper() + s[1:] for s in str(message.content).split(' ')]))
         else:
             n1, n2 = create_random_comparison()
