@@ -6,6 +6,7 @@ from discord.ext import commands
 import platform
 import random
 from egg_assets import greet_txt, tulku_memes, bw_text, fortune_list
+import eggscript as es
 import re
 
 # Here you can modify the bot's prefix and description and wether it sends help in direct messages or not.
@@ -64,28 +65,14 @@ async def on_message(message):
                                                       May I be your overlord?''')
     elif str(message.content).lower() == 'yes':
         await client.send_message(message.channel, 'Take down ye trowsers boy!')
-    # fori? (beginnings of eggscript)
-    elif (re.compile('for i in \d* to \d*: print "[a-zA-Z0-9]*";').match(str(message.content))):
-        line = str(message.content)
-
-        start = line.find('in ') + 3
-        end = line.find(' to')
-
-        x = line[start:end]
-        print(x)
-
-        start = line.find('to ') + 3
-        end = line.find(':')
-
-        y = line[start:end]
-
-        start = line.find('t "') + 3
-        end = line.find('";')
-
-        msg = line[start:end]
-
-        for i in range(int(x), int(y)):
-            client.say(msg)
+    # early implementation of eggscript
+    elif (str(message.content).startswith('eggscript')):
+        script = ''
+        for line in str(message.content).splitlines():
+            if (line.startswith('eggscript')):
+                continue
+            script += line
+        es.go(script)
     elif str(message.author.name) != 'Egg Bot':
         # I Think This *should* Return Any Question Asked In The Channel In Jeggden Smith Case
         if str(message.content).endsWith('?'):
