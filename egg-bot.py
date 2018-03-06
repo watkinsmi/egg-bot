@@ -83,7 +83,7 @@ async def on_message(message):
                 await client.send_message(message.channel, 'J🥚den 🔨 Smith ☝ wants 🥈 to 🎓 know: ' + msg)
         else:
             n1, n2 = create_random_comparison()
-            if n1 > n2:
+            if n1 == 10:
                 await client.send_message(message.channel, 'Eggcellent communication my dude!')
             elif n1 == n2:
                 await client.send_message(message.channel, 'https://media1.tenor.com/images/a0eb3bd86d78684a8e92858f428af621/tenor.gif?itemid=5913912')
