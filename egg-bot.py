@@ -72,11 +72,15 @@ async def on_message(message):
             if (line.startswith('eggscript')):
                 continue
             script += line
-        es.go(script)
+        await es.go(script, client, message.channel)
     elif str(message.author.name) != 'Egg Bot':
-        # I Think This *should* Return Any Question Asked In The Channel In Jeggden Smith Case
+        # I Think This *should* Return Any Question Asked In The Channel In Jeggden Smith Case 10% of the time
         if str(message.content).endswith('?'):
-            await client.send_message(message.channel, ' '.join([s[0].upper() + s[1:] for s in str(message.content).split(' ')]))
+            rnd = random.randint(0, 101)
+            print(rnd)
+            if rnd > 90:
+                msg = transform_msg(' '.join([s[0].upper() + s[1:] for s in str(message.content).split(' ')]))
+                await client.send_message(message.channel, 'J🥚den 🔨 Smith ☝ wants 🥈 to 🎓 know: ' + msg)
         else:
             n1, n2 = create_random_comparison()
             if n1 == 10:
@@ -128,6 +132,10 @@ async def fortune(*args):
 @client.command()
 async def male_seggshual_organ(*args):
     await client.say('https://i.imgur.com/Cb6sgyi.jpg')
+
+def transform_msg(msg):
+    return re.sub(r'[eE]gg', '🥚', msg)
+
 
 
 

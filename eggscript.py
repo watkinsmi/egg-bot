@@ -1,3 +1,9 @@
+import discord
+import asyncio
+from discord.ext.commands import Bot
+import platform
+import random
+from egg_assets import greet_txt, tulku_memes, bw_text, fortune_list
 import re
 
 commands = dict()
@@ -10,17 +16,17 @@ script = 'eggscript\n' \
        '1 print hello\n' \
        '2 end\n' \
        '3 number i 0\n' \
-       '4 print true\n' \
-       '5 ++ i\n' \
-       '6 if < $i 2\n' \
-       '7 print $i\n' \
-       '8 goto 4\n' \
-       '9 end\n' \
-       '10 print $i\n' \
-       '11 -- i\n' \
-       '12 print $i'
+       '4 number j 2 \n' \
+       '5 print true\n' \
+       '6 ++ i\n' \
+       '7 if < $i $j\n' \
+       '8 print $i\n' \
+       '9 goto 4\n' \
+       '10 end\n' \
+       '11 print $i\n' \
+       '12 -- i\n' \
+       '13 print $i'
 '''
-
 def for_loop(start, end):
     param = commands[start][4:]
     x = int(param[0:param.find(':')])
@@ -30,13 +36,14 @@ def for_loop(start, end):
         for j, cmd in enumerate(range(start + 1, end)):
             queue.insert(j, cmd)
 
-def prnt(start):
+async def prnt(start, client, channel):
     param = commands[start][6:]
     if param.startswith('$'):
+        print(vars.keys())
         var_name = param[1:]
-        print(str(vars[var_name]))
+        await client.send_message(channel, str(vars[var_name]))
     else:
-        print(commands[start][6:])
+        await client.send_message(channel, commands[start][6:])
 
 def number(start):
     param = commands[start][7:]
@@ -80,14 +87,21 @@ def if_statement(start, end):
 
 def goto(start):
     param = int(commands[start][5:])
-    for j, cmd in enumerate(range(param, start)):
+    for j, cmd in enumerate(range(param, start + 1)):
         queue.insert(j, cmd)
 
-def parse():
+async def parse(client, channel):
     while (len(queue) > 0):
         i = queue.pop(0)
         cmd = commands[i]
-        if cmd.startswith('for'):
+        print('current line: ' + str(i))
+        print('current cmd: ' + cmd)
+        print('current queue: ' + str(queue))
+
+        if cmd.startswith('STOP'):
+            while (len(queue) > 0):
+                queue.pop()
+        elif cmd.startswith('for'):
             end_for = -1
             for j in range(i, len(commands.keys())):
                 if commands[j].startswith('end'):
@@ -95,7 +109,7 @@ def parse():
                     break
             for_loop(i, end_for)
         elif cmd.startswith('print'):
-            prnt(i)
+            await prnt(i, client, channel)
         elif cmd.startswith('number'):
             number(i)
         elif cmd.startswith('++'):
@@ -112,8 +126,10 @@ def parse():
         elif cmd.startswith('goto'):
             goto(i)
 
-def go(script):
-    for line in script.splitlines():
+async def go(script, client, channel):
+    for line in script.split(';'):
+        if line.startswith('eggscript;') or len(line) == 0:
+            continue
         lineInd = int(line[0:line.find(' ')])
         lineCommand = line[line.find(' ') + 1:]
 
@@ -121,14 +137,5 @@ def go(script):
 
         queue.append(lineInd)
 
-    parse()
-'''
-go(script)
+    await parse(client, channel)
 
-code = ''
-for line in script.splitlines():
-    if line.startswith('eggscript'):
-        continue
-    code += line + '\n'
-go(code)
-'''
